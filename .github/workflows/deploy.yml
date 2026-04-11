@@ -8,23 +8,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Даем права на запись
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          lfs: true # Включаем LFS
-          fetch-depth: 0 # Скачиваем всю историю для корректной работы LFS
+          lfs: true
+          fetch-depth: 0
 
-      - name: Install Git LFS
-        run: git lfs install
-
-      - name: Pull LFS files
-        run: git lfs pull # Явно скачиваем 117MB видео на сервер сборки
+      - name: Force LFS Download
+        run: |
+          git lfs install
+          git lfs pull
+          git lfs checkout # Это превратит 134 байта в 117 МБ
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
-          publish_branch: gh-pages # Публикуем в специальную ветку
+          publish_branch: gh-pages
