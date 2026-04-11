@@ -1,1 +1,26 @@
+name: Deploy LFS to Pages
 
+on:
+push:
+branches: [ "main" ]
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout code & LFS files
+uses: actions/checkout@v3
+with:
+lfs: true # Скачиваем реальные видео, а не указатели
+
+- name: Remove LFS metadata
+run: |
+git lfs uninstall
+rm -Rf .git
+rm .gitattributes
+
+- name: Deploy to GitHub Pages
+uses: peaceiris/actions-gh-pages@v3
+with:
+github_token: ${{ secrets.GITHUB_TOKEN }}
+publish_dir: ./
