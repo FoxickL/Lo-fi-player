@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div class="video-background">
+    <video autoplay muted loop id="myVideo">
+        <source id="back" src="video/EP03.mp4" type="video/mp4">
+    </video>
+</div>
+    <div id="buttons">
+        <button id="leftArrow">&#10094;</button>
+        <button id="rightArrow">&#10095;</button>
+    </div>
+    <div class="change-blur">
+        <input type="checkbox" id="blur" style="z-index: 1;">Нажмите если хотите заблюрить фон
+    </div>
+</body>
+<script src="background.js"></script>
+<script>
+    document.getElementById('blur').addEventListener('change',e=>{
+        if(e.target.checked){
+            document.getElementById('myVideo').classList.add('blur')
+        }
+        else{
+            document.getElementById('myVideo').classList.remove('blur')
+
+            
+        }        
+    })
+</script>
+</html>
