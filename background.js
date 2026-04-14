@@ -9,8 +9,7 @@ function movingArrow(move){
     }
     document.getElementById('myVideo').classList.add('blur')
     setTimeout(()=>{
-        const antiCache = '?t=' + new Date().getTime();
-        document.getElementById('myVideo').src = background_img[current]+antiCache;
+        document.getElementById('myVideo').src = background_img[current];
         document.getElementById('myVideo').load();    
         document.getElementById('myVideo').play();
         if(document.getElementById('blur').checked){
